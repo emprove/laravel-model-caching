@@ -19,6 +19,10 @@ trait CachePrefixing
 
     protected function getDatabaseName() : string
     {
+        if ($this->query->connection instanceof \Jenssegers\Mongodb\Connection) {
+            return $this->query->connection->getMongoDB()->getDatabaseName();
+        }
+
         return $this->query->connection->getDatabaseName();
     }
 }
